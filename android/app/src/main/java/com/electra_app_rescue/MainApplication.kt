@@ -1,4 +1,4 @@
-package com.electra_app_rescue_tmp
+package com.electra_app_rescue
 
 import android.app.Application
 import com.facebook.react.PackageList
