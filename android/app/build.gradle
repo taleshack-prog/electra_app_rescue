@@ -116,3 +116,19 @@ dependencies {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+
+android {
+    signingConfigs {
+        release {
+            storeFile file('debug-release.keystore')
+            storePassword 'electra123'
+            keyAlias 'electra-rescue-key'
+            keyPassword 'electra123'
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+}
