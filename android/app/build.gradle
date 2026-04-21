@@ -74,9 +74,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.electra_rescue_clean"
+    namespace "com.electra_app_rescue"
     defaultConfig {
-        applicationId "com.electra_rescue_clean"
+        applicationId "com.electra_app_rescue"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -116,3 +116,19 @@ dependencies {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+
+android {
+    signingConfigs {
+        release {
+            storeFile file('debug-release.keystore')
+            storePassword 'electra123'
+            keyAlias 'electra-rescue-key'
+            keyPassword 'electra123'
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+}
