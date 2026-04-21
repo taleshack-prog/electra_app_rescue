@@ -71,7 +71,7 @@ export default function DetalhesChamadoScreen() {
   const handleAceitar = () => {
     Alert.alert('Aceitar chamado?', `Você irá até ${chamado.cliente} — ${chamado.endereco}`, [
       { text:'Cancelar', style:'cancel' },
-      { text:'Aceitar', onPress: () => navigation.replace('Navegacao', { chamadoId }) },
+      { text:'Aceitar', onPress: () => navigation.navigate('Navegacao' as any, { chamadoId }) },
     ]);
   };
 
@@ -301,7 +301,7 @@ const s = StyleSheet.create({
   btnRecusar:   { height:50, borderWidth:1.5, borderColor:'rgba(255,255,255,0.15)', borderRadius:16, alignItems:'center', justifyContent:'center' },
   btnRecusarText:{ fontFamily:'Syne-Bold', fontSize:15, color:'rgba(240,244,255,0.5)' },
 
-  recusaOverlay:  { position:'absolute', inset:0, zIndex:100, justifyContent:'flex-end' } as any,
+  recusaOverlay:  { position:'absolute', top:0, bottom:0, left:0, right:0, zIndex:100, justifyContent:'flex-end' },
   recusaBackdrop: { ...StyleSheet.absoluteFillObject, backgroundColor:'rgba(0,0,0,0.6)' },
   recusaSheet:    { backgroundColor:'#111827', borderTopLeftRadius:24, borderTopRightRadius:24, padding:20, paddingBottom:36 },
   recusaHandle:   { width:40, height:4, backgroundColor:'rgba(255,255,255,0.15)', borderRadius:2, alignSelf:'center', marginBottom:16 },
