@@ -4,6 +4,7 @@ import {
   ScrollView, TouchableOpacity,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useChamados } from '../../hooks/useChamados';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation';
 
@@ -21,6 +22,7 @@ type Filtro = 'todos' | 'sos' | 'padrao' | 'aceito' | 'concluido';
 
 export default function ChamadosScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const { chamados: chamadosReais } = useChamados();
   const fadeAnim  = useRef(new Animated.Value(0)).current;
   const slideAnim = useRef(new Animated.Value(20)).current;
   const pulseAnim = useRef(new Animated.Value(1)).current;
@@ -37,6 +39,26 @@ export default function ChamadosScreen() {
       Animated.timing(pulseAnim, { toValue:1,    duration:700, useNativeDriver:true }),
     ])).start();
   }, []);
+
+  // Mapeia dados reais do Supabase para o formato da tela
+  const CHAMADOS_REAIS = chamadosReais.map(c => ({
+    id: c.id,
+    tipo: 'SOS Emergencial',
+    dist: '— km',
+    eta: '— min',
+    valor: `R$ ${c.valor}`,
+    bateria: `${c.bateria_nivel}%`,
+    cliente: c.endereco,
+    veiculo: c.veiculo,
+    urgencia: c.bateria_nivel <= 10 ? 'alta' : 'media',
+    status: 'disponivel',
+    hora: new Date(c.created_at).toLocaleTimeString('pt-BR', { hour:'2-digit', minute:'2-digit' }),
+  }));
+
+  const CHAMADOS = CHAMADOS_REAIS.length > 0 ? CHAMADOS_REAIS : [
+    { id:'1', tipo:'SOS Emergencial', dist:'1,2 km', eta:'~4 min',  valor:'R$ 85',  bateria:'8%',  cliente:'Marina Costa', veiculo:'Tesla Model 3',  urgencia:'alta',  status:'disponivel', hora:'14:32' },
+    { id:'4', tipo:'SOS Emergencial', dist:'3,5 km', eta:'~11 min', valor:'R$ 90',  bateria:'5%',  cliente:'Pedro Lima',  veiculo:'Hyundai IONIQ', urgencia:'alta',  status:'disponivel', hora:'14:20' },
+  ];
 
   const chamadosFiltrados = CHAMADOS.filter(c => {
     if (filtro === 'todos')    return c.status === 'disponivel';
