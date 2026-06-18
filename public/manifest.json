@@ -1,0 +1,12 @@
+{
+  "name": "ELECTRA Rescue",
+  "short_name": "Rescue",
+  "description": "App do Resgatista ELECTRA",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#070B14",
+  "theme_color": "#FF3B5C",
+  "icons": [
+    {"src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}
+  ]
+}

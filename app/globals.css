@@ -1,0 +1,39 @@
+:root {
+  --bg: #070B14;
+  --bg2: #0D1117;
+  --bg3: #111620;
+  --border: rgba(255,255,255,0.08);
+  --text: #EEF2F7;
+  --text2: rgba(238,242,247,0.6);
+  --text3: rgba(238,242,247,0.35);
+  --blue: #00E5FF;
+  --green: #00FF87;
+  --red: #FF3B5C;
+  --amber: #FFB800;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  min-height: 100vh;
+  max-width: 430px;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: inherit;
+}
+
+input {
+  outline: none;
+  font-family: inherit;
+}
+
+a { text-decoration: none; color: inherit; }
