@@ -14,7 +14,7 @@ export default function CadastroPage() {
   const cadastrar = async () => {
     setLoading(true); setErro('');
     try {
-      const r = await fetch('https://electra-dashboard-steel.vercel.app/api/auth/register', {
+      const r = await fetch('https://electra-dashboard-steel.vercel.app/api/resgatistas/cadastro', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: nome, email, password: senha, phone: telefone }),
