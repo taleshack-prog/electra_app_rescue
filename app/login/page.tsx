@@ -11,6 +11,12 @@ export default function LoginRescue() {
   const [loading, setLoading] = useState(false);
   const [erro, setErro] = useState('');
 
+  const bypass = () => {
+    localStorage.setItem('rescue_token', 'demo_token_bypass');
+    localStorage.setItem('rescue_driver', JSON.stringify({ id: 'demo', name: 'Resgatista Demo', email: 'demo@electra.com', phone: '(51) 99999-9999' }));
+    router.push('/dashboard');
+  };
+
   const login = async () => {
     if (!email || !senha) { setErro('Preencha email e senha.'); return; }
     setLoading(true); setErro('');
@@ -51,6 +57,14 @@ export default function LoginRescue() {
         {erro && <p style={{ color: '#FF3B5C', fontSize: 13, textAlign: 'center', marginBottom: 12 }}>{erro}</p>}
         <button onClick={login} disabled={loading} style={{ width: '100%', padding: 15, background: '#FF3B5C', border: 'none', borderRadius: 14, color: '#fff', fontSize: 16, fontWeight: 700, cursor: 'pointer', opacity: loading ? 0.7 : 1, boxShadow: '0 0 30px rgba(255,59,92,0.3)' }}>
           {loading ? 'Entrando...' : '🚐 Entrar'}
+        </button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '16px 0' }}>
+          <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.08)' }} />
+          <span style={{ fontSize: 11, color: 'rgba(238,242,247,0.25)' }}>ou</span>
+          <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.08)' }} />
+        </div>
+        <button onClick={bypass} style={{ width: '100%', padding: 13, background: 'rgba(255,59,92,0.08)', border: '1px dashed rgba(255,59,92,0.3)', borderRadius: 14, color: '#FF3B5C', fontSize: 13, cursor: 'pointer' }}>
+          🔓 Acesso Demo (temporário)
         </button>
         <p style={{ textAlign: 'center', fontSize: 13, color: 'rgba(238,242,247,0.35)', marginTop: 16 }}>
           Novo resgatista? <span onClick={() => router.push('/cadastro')} style={{ color: '#FF3B5C', cursor: 'pointer' }}>Solicitar cadastro</span>
